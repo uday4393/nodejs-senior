@@ -30,3 +30,9 @@ export class GetCustomerInput {
   @Field(() => WhereCustomerInput, { nullable: true })
   where: WhereCustomerInput;
 }
+
+@InputType()
+export class UpdateCustomerInput {
+  @Field(() => String)
+  email: string;
+}

@@ -20,6 +20,8 @@ scalar Timestamp
 
 type Query {
   customers(data: GetCustomerInput!): [Customer!]!
+  findAllcustomers: [Customer!]!
+  getCustomerById(id: String!): Customer!
 }
 
 input GetCustomerInput {
@@ -34,4 +36,13 @@ input WhereCustomerInput {
   email: String
   createdAt: Timestamp
   updatedAt: Timestamp
+}
+
+type Mutation {
+  updateCustomerById(id: String!, data: UpdateCustomerInput!): Customer!
+  deleteCustomerById(id: String!): Customer!
+}
+
+input UpdateCustomerInput {
+  email: String!
 }

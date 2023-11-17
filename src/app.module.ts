@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { PrismaService } from './prisma.service';
 import { CustomerModule } from './customer/customer.module';
+import { GraphQLError } from 'graphql';
 
 @Module({
   imports: [
@@ -20,6 +21,13 @@ import { CustomerModule } from './customer/customer.module';
       context: ({ request, reply }) => ({ request, reply }),
       playground: true,
       introspection: true, // TODO update this so that it's off in production;
+      formatError(error: GraphQLError) {
+        const graphQLFormattedError = {
+          message: error.message,
+          code: error.extensions?.code || 'SERVER_ERROR',
+        };
+        return graphQLFormattedError;
+      },
     }),
   ],
   controllers: [AppController],
